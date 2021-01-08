@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @import url("fonts/EuclidFlex-Bold/style.css");
+
+        .test{
+            height: 108px;
+            padding: 0 15px 0 35px;
+            background: url(img/stena.png);
+        }
+
+        .shapka{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: auto;
+        }
+
+        .logo{
+            width: 203px;
+            height: 56px;
+        }
+
+        .menu{
+            /*height: 40px;*/
+            /*width: 100px;*/
+            flex: 3 1 auto;
+
+            font-family: 'Euclid Flex';
+            font-weight: bold;
+
+            font-size: 16px;
+
+            text-align: center;
+            margin: auto;
+            color: #000000;
+        }
+
+        .menu>p{
+            cursor: pointer;
+        }
+        .menu>img{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="margin: 0;">
+    <div class="test">
+        <div class="shapka">
+            <div class="menu" style="flex: 2 1 auto">
+                <p>
+                    УСЛУГИ
+                </p>
+            </div>
+            <div class="menu" style="flex: 2 1 auto">
+                <p>
+                    КОНТАКТЫ
+                </p>
+            </div>
+            <div class="menu" style="flex: 2 1 auto">
+                <p>
+                    О НАС
+                </p>
+            </div>
+            <div class="menu" style=" margin: auto">
+                <div>
+                    <img src="img/logo.png" style="width: 203px; height: 56px;" alt="logo">
+                </div>
+                <div style="margin-top: 7px;">
+                    <img src="img/by%20Jozzi.png" alt="logo">
+                </div>
+            </div>
+            <div class="menu">
+                <p>
+                    +7 (999) 999-99-99
+                </p>
+            </div>
+            <div class="menu">
+                <img src="img/insta.png" style="width: 34px; height: 34px;" alt="insta">
+                <img src="img/spotify.png" style="width: 34px; height: 34px;" alt="spotify">
+            </div>
+        </div>
+    </div>
+    <div style="position: relative; z-index: 10; width: 100%; background-color: #0D0D0B; height: 496px; ">
+        <div style="text-align: center">
+            <img style="margin-top: 66px; z-index: 10" src="img/ДЖОЗИ%20на%20первом%20блоке.png">
+        </div>
+    </div>
+
+    <div style="position: relative; z-index: 100; width: 100%; background-color: #FCFCFC; height: 87px;">
+
+    </div>
+
+    <div style="position: relative; width: 100%; ">
+        <img style="width: 100%; margin: 0;" src="img/collag.png">
+    </div>
+
+</body>
+</html>
