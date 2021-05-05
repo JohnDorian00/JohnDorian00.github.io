@@ -20,16 +20,18 @@
         let date = new Date(2021, 4, 4),
             spend = new Date() - date;
 
-		setInterval(()=>{
+		let refreshTime = ()=>{
 			spend = new Date() - date;
 			document.getElementById("date").textContent = date.toLocaleDateString("ru");
 			document.getElementById("days").textContent = Math.floor(spend/(1000*60*60*24)) + " days";
 			document.getElementById("hours").textContent = Math.floor(spend/(1000*60*60)) + " hours";
 			document.getElementById("min").textContent = Math.floor(spend/(1000*60)) + " minutes";
 			document.getElementById("sec").textContent = Math.floor(spend/(1000)) + " seconds";
-		}, 1000)
+		}
 
-        
+		refreshTime();
+		setInterval(refreshTime, 1000)
+
     </script>
 </body>
 <style>
