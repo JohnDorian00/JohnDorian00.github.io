@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How long has it been</title>
+</head>
+<body style="background-color: black; text-align: center; display: flex;">
+    <div style="width: 100%; height: 100%;">
+        <h1>How long has it been?</h1>
+        <h1 id="date"></h1>
+        <h1>&nbsp;</h1>
+        <h2 id="days"></h2>
+        <h2 id="hours"></h2>
+        <h2 id="min"></h2>
+        <h2 id="sec"></h2>
+    </div>
+
+    <script>
+        'use strict';
+        let date = new Date(2021, 4, 4),
+            spend = new Date() - date;
+
+		let refreshTime = ()=>{
+			spend = new Date() - date;
+			document.getElementById("date").textContent = date.toLocaleDateString("ru");
+			document.getElementById("days").textContent = Math.floor(spend/(1000*60*60*24)) + " days";
+			document.getElementById("hours").textContent = Math.floor(spend/(1000*60*60)) + " hours";
+			document.getElementById("min").textContent = Math.floor(spend/(1000*60)) + " minutes";
+			document.getElementById("sec").textContent = Math.floor(spend/(1000)) + " seconds";
+		}
+
+		refreshTime();
+		setInterval(refreshTime, 1000)
+
+    </script>
+</body>
+<style>
+    h1{
+        color: white;
+        font-family: Fantasy, sans-serif;
+        font-size: 3rem;
+    }
+    h2{
+        color: white;
+        font-family: Fantasy, sans-serif;
+        font-size: 3rem;
+    }
+    @media (max-width: 1000px){
+        h1{
+            color: white;
+            font-family: Fantasy, sans-serif;
+            font-size: 6rem;
+        }
+        h2{
+            color: white;
+            font-family: Fantasy, sans-serif;
+            font-size: 6rem;
+        }
+    }
+</style>
+</html>

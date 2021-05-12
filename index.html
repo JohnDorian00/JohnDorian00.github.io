@@ -2,60 +2,100 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>How long has it been</title>
+    <title>vla-dick sweetshort</title>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 </head>
-<body style="background-color: black; text-align: center; display: flex;">
-    <div style="width: 100%; height: 100%;">
-        <h1>How long has it been?</h1>
-        <h1 id="date"></h1>
-        <h1>&nbsp;</h1>
-        <h2 id="days"></h2>
-        <h2 id="hours"></h2>
-        <h2 id="min"></h2>
-        <h2 id="sec"></h2>
-    </div>
-
-    <script>
-        'use strict';
-        let date = new Date(2021, 4, 8),
-            spend = new Date() - date;
-
-		let refreshTime = ()=>{
-			spend = new Date() - date;
-			document.getElementById("date").textContent = date.toLocaleDateString("ru");
-			document.getElementById("days").textContent = Math.floor(spend/(1000*60*60*24)) + " days";
-			document.getElementById("hours").textContent = Math.floor(spend/(1000*60*60)) + " hours";
-			document.getElementById("min").textContent = Math.floor(spend/(1000*60)) + " minutes";
-			document.getElementById("sec").textContent = Math.floor(spend/(1000)) + " seconds";
-		}
-
-		refreshTime();
-		setInterval(refreshTime, 1000)
-
-    </script>
+<body style="width: 100%; height: 100%">
+<div id="map" style="width: 100%; height: 100%"></div>
 </body>
+
+<script type="text/javascript">
+    'use strict'
+
+    // Формат входных данных - json
+
+    // Пример создания json в java (тут массив, надо чуть более сложнее)
+    // JSON-ify the ArrayList
+    // String json = "[";
+    // for (int i = 0; i < arr.size(); i++) {
+    //     if (i != 0) json += ",";
+    //     json += "'"+arr[i]+"'"; // NOTE: this doesn't escape special characters in arr[i]
+    // }
+    // json += "]";
+
+
+    // Вызов функции из java
+    //webEngine.executeScript( " init(' " + json + " ') " );
+
+
+    // Из этой структуры...
+    // [
+    //     {
+    //         coord: [55.76, 37.64],
+    //         hintLabel: 'Содержимое всплывающей подсказки',
+    //         balloonContent: 'Содержимое балуна'
+    //     },
+    //     {
+    //         coord: [55.76, 37.37.649],
+    //         hintLabel: 'Содержимое всплывающей подсказки2',
+    //         balloonContent: 'Содержимое балуна2'
+    //     },
+    //     {
+    //         coord: [55.74, 37.53],
+    //         hintLabel: 'Содержимое всплывающей подсказки3',
+    //         balloonContent: 'Содержимое балуна3'
+    //     }
+    // ]
+    //
+    // ...получить надо такую строку и отправить как входной параметр
+    // '[{"coord":[55.76,37.64],"hintLabel":"Содержимое всплывающей подсказки","balloonContent":"Содержимое балуна"},{"coord":[55.76,37.649],"hintLabel":"Содержимое всплывающей подсказки2","balloonContent":"Содержимое балуна2"},{"coord":[55.74,37.53],"hintLabel":"Содержимое всплывающей подсказки3","balloonContent":"Содержимое балуна3"}]'
+
+
+    const json = '[{"coord":[55.76,37.64],"hintLabel":"Содержимое всплывающей подсказки","balloonContent":"Содержимое балуна"},{"coord":[55.76,37.649],"hintLabel":"Содержимое всплывающей подсказки2","balloonContent":"Содержимое балуна2"},{"coord":[55.74,37.53],"hintLabel":"Содержимое всплывающей подсказки3","balloonContent":"Содержимое балуна3"}]'
+
+    // Это будет запускаться из java, потом этот вызов надо удалить
+    init(json);
+
+    function init(json) {
+        ymaps.ready(()=>{
+            let myMap = new ymaps.Map("map", {
+                // Координаты центра карты «широта, долгота».
+                center: [55.76, 37.64],
+                // 0-12
+                zoom: 12,
+                // Элементы управления
+                controls: [
+                    'zoomControl', // Ползунок масштаба
+                    'rulerControl', // Линейка
+                    'routeButtonControl', // Панель маршрутизации
+                    'trafficControl', // Пробки
+                    'typeSelector', // Переключатель слоев карты
+                ]
+            });
+
+            let points = JSON.parse(json);
+
+            points.forEach((point)=>{
+                myMap.geoObjects.add(new ymaps.Placemark(point.coord, {
+                    // Хинт показывается при наведении мышкой на иконку метки.
+                    hintContent: point.hintContent,
+                    // Балун откроется при клике по метке.
+                    balloonContent: point.balloonContent
+                }));
+            })
+        });
+    }
+
+</script>
 <style>
-    h1{
-        color: white;
-        font-family: Fantasy, sans-serif;
-        font-size: 3rem;
+    * { padding: 0; margin: 0; }
+    html, body, #fullheight {
+        min-height: 100% !important;
+        height: 100%;
     }
-    h2{
-        color: white;
-        font-family: Fantasy, sans-serif;
-        font-size: 3rem;
-    }
-    @media (max-width: 1000px){
-        h1{
-            color: white;
-            font-family: Fantasy, sans-serif;
-            font-size: 6rem;
-        }
-        h2{
-            color: white;
-            font-family: Fantasy, sans-serif;
-            font-size: 6rem;
-        }
+    #fullheight {
+        width: 250px;
+        background: blue;
     }
 </style>
 </html>
