@@ -11,14 +11,20 @@ $(document).ready(function() {
 
         if (maxTime) {
             if (nagruzka) {
-                time = batteryAmount * capacity * (voltage / nagruzka);
-                $('#time').val(time.toFixed(    2));
+                $('#time').val(calcTime(batteryAmount * capacity, voltage, nagruzka));
             }
         } else {
             if (time) {
-                nagruzka = (batteryAmount * capacity * voltage) / time;
-                $('#nagruzka').val(nagruzka.toFixed(2));
+                $('#nagruzka').val(calcNagruzka(batteryAmount * capacity, voltage, time));
             }
         }
     })
 });
+
+function calcTime(Q, U, P) {
+    return ((Q*U*0.7)/P).toFixed(2)
+}
+
+function calcNagruzka(Q, U, t) {
+    return ((Q*U*0.7)/t).toFixed(2)
+}
